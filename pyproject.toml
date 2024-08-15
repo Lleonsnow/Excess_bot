@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "excess-bot"
+version = "0.1.0"
+description = ""
+authors = ["Leonsnow <lord4714snow@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiogram = "^3.11.0"
+sqlalchemy = "^2.0.32"
+fastapi = "^0.112.0"
+pydantic = "^2.8.2"
+pydantic-settings = "^2.4.0"
+python-dotenv = "^1.0.1"
+alembic = "^1.13.2"
+apscheduler = "^3.10.4"
+asyncpg = "^0.29.0"
+pyjwt = "^2.9.0"
+black = "^24.8.0"
+isort = "^5.13.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
