@@ -1,93 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Аутентификация</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .login-container h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            text-align: center;
-        }
-        .login-container input[type="text"], .login-container input[type="password"] {
-            width: 90%;
-            padding: 10px;
-            margin: 1px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #007bff;
-            border: none;
-            color: white;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .login-container button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <h1>Аутентификация</h1>
-        <label for="login"></label><input type="text" id="login" placeholder="Логин">
-        <label for="password"></label><input type="password" id="password" placeholder="Пароль">
-        <button onclick="authenticate()">Войти</button>
-        <p id="response" style="color: red; text-align: center; margin-top: 20px;"></p>
-    </div>
+# This is a basic workflow to help you get started with Actions
 
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        const tg = window.Telegram.WebApp;  // Подключение к Telegram Web App API
+name: CI
 
-        tg.expand();  // Делает Web App на весь экран
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "master" branch
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
 
-        function authenticate() {
-            const login = document.getElementById('login').value;
-            const password = document.getElementById('password').value;
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
-            fetch('/auth', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: login, password: password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.token) {
-                    document.getElementById('response').style.color = 'green';
-                    document.getElementById('response').innerText = 'Аутентификация успешна!';
-                    // Передача токена обратно в бот через Web App API
-                    tg.sendData(JSON.stringify({ auth: true, token: data.token }));
-                    tg.close();  // Закрытие Web App
-                } else {
-                    document.getElementById('response').innerText = 'Ошибка: ' + data.detail;
-                }
-            })
-            .catch(error => {
-                document.getElementById('response').innerText = 'Произошла ошибка: ' + error.message;
-            });
-        }
-    </script>
-</body>
-</html>
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
