@@ -10,8 +10,8 @@ api_router = APIRouter()
 
 
 @api_router.get("/")
-async def root():
-    ...
+async def root(*args, **kwargs):
+    print("API is working")
 
 
 @bot_router.message()
@@ -35,6 +35,10 @@ async def start_api():
     await server.serve()
 
 
+async def main():
+    await asyncio.gather(start_api(), start_bot())
+
+
 if __name__ == '__main__':
     api = FastAPI()
     api.include_router(api_router)
@@ -44,4 +48,4 @@ if __name__ == '__main__':
     bot = Bot(token=token)
     dp = Dispatcher()
     dp.include_router(bot_router)
-    asyncio.gather(start_api(), start_bot())
+    asyncio.run(main())
