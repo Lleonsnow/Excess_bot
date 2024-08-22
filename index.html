@@ -90,7 +90,7 @@
                 }
             })
             .catch(error => {
-                document.getElementById('response').innerText = 'Произошла ошибка: ' + JSON.stringify(error);
+                document.getElementById('response').innerText = 'Произошла ошибка: ' + JSON.stringify(error.text);
             });
     }
 </script>

@@ -2,6 +2,8 @@ import asyncio
 from aiogram import Bot, Dispatcher, Router, types
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from fastapi import FastAPI, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 from Api.core.settings import Settings
 
@@ -9,13 +11,19 @@ bot_router = Router()
 api_router = APIRouter()
 
 
-@api_router.get("/")
-async def root():
-    print("API is working")
+class AuthData(BaseModel):
+    username: str
+    password: str
+
+
+# @api_router.get("/")
+# async def root():
+#     print("API is working")
 
 
 @api_router.post("/webhook")
-async def webhook():
+async def webhook(auth_data: AuthData):
+    print(auth_data)
     print("Webhook is working")
 
 
@@ -47,6 +55,7 @@ async def main():
 if __name__ == '__main__':
     api = FastAPI()
     api.include_router(api_router)
+    api.add_middleware(CORSMiddleware, allow_origins=["*"], allow_headers=["*"], allow_methods=["*"], allow_credentials=True)
     settings = Settings()
     token = settings.token.get_secret_value()
     web_url = settings.web_app_url.get_secret_value()
