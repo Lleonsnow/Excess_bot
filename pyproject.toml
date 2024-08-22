@@ -19,6 +19,7 @@ asyncpg = "^0.29.0"
 pyjwt = "^2.9.0"
 black = "^24.8.0"
 isort = "^5.13.2"
+uvicorn = "^0.30.6"
 
 
 [build-system]
