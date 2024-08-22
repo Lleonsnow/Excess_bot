@@ -10,8 +10,13 @@ api_router = APIRouter()
 
 
 @api_router.get("/")
-async def root(*args, **kwargs):
+async def root():
     print("API is working")
+
+
+@api_router.post("/webhook")
+async def webhook():
+    print("Webhook is working")
 
 
 @bot_router.message()

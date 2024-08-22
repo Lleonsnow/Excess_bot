@@ -70,7 +70,7 @@
         const login = document.getElementById('login').value;
         const password = document.getElementById('password').value;
 
-        fetch('0.0.0.0:8000', {
+        fetch('http://localhost:8000/webhook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
