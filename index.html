@@ -62,15 +62,15 @@
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
-    const tg = window.Telegram.WebApp;  // Подключение к Telegram Web App API
+    const tg = window.Telegram.WebApp;  // Подключение к Telegram Web app API
 
-    tg.expand();  // Делает Web App на весь экран
+    tg.expand();  // Делает Web app на весь экран
 
     function authenticate() {
         const login = document.getElementById('login').value;
         const password = document.getElementById('password').value;
 
-        fetch('http://localhost:8000/webhook', {
+        fetch('https://6add-81-177-251-71.ngrok-free.app/webhook', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,9 +82,9 @@
                 if (data.token) {
                     document.getElementById('response').style.color = 'green';
                     document.getElementById('response').innerText = 'Аутентификация успешна!';
-                    // Передача токена обратно в бот через Web App API
+                    // Передача токена обратно в бот через Web app API
                     tg.sendData(JSON.stringify({auth: true, token: data.token}));
-                    tg.close();  // Закрытие Web App
+                    tg.close();  // Закрытие Web app
                 } else {
                     document.getElementById('response').innerText = 'Ошибка: ' + data.detail;
                 }

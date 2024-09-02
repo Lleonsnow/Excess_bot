@@ -10,8 +10,6 @@ load_dotenv()
 class Settings(BaseSettings):
     token: SecretStr = os.getenv("BOT_TOKEN")
     web_app_url: SecretStr = os.getenv("WEB_APP_URL")
-    # admin_id: int
-    # webhook_url: str
 
     class Config:
         env_file = ".env"
